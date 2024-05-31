@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Koltion Components Demo</string>
+
+    <string-array name="weight_entry">
+        <item>Grams</item>
+        <item>Kg</item>
+        <item>Pounds</item>
+        <item>Ounces</item>
+    </string-array>
 </resources>
