@@ -1,10 +1,12 @@
 package com.fabscorp.koltioncomponentsdemo
 
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import com.fabscorp.koltioncomponentsdemo.databinding.ActivityMainBinding
+import com.google.android.material.snackbar.Snackbar
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var bindding: ActivityMainBinding
@@ -17,14 +19,29 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         supportActionBar?.hide()
 
         bindding.buttonToast.setOnClickListener(this)
+        bindding.buttonSnack.setOnClickListener(this)
     }
-
     override fun onClick(v: View) {
         when (v.id) {
             bindding.buttonToast.id -> {
                 val toast = Toast.makeText(this, "Toast me!", Toast.LENGTH_SHORT)
                 toast.show()
             }
+
+            bindding.buttonSnack.id -> {
+                val snack = Snackbar.make(bindding.linearRoot, "Snack me!", Snackbar.LENGTH_SHORT)
+                snack.setTextColor(Color.BLUE)
+                snack.animationMode = Snackbar.ANIMATION_MODE_SLIDE
+                snack.setActionTextColor(Color.GREEN)
+                snack.setAction("Undo", View.OnClickListener {
+                    Snackbar.make(bindding.linearRoot, "Succsess!", Snackbar.LENGTH_SHORT)
+                        .setAnimationMode(Snackbar.ANIMATION_MODE_FADE)
+                        .show()
+                })
+                snack.setBackgroundTint(Color.GRAY)
+                snack.show()
+            }
+
         }
     }
 }
