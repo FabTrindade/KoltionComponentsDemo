@@ -4,6 +4,7 @@ import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import com.fabscorp.koltioncomponentsdemo.databinding.ActivityMainBinding
 import com.google.android.material.snackbar.Snackbar
@@ -20,7 +21,17 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
         bindding.buttonToast.setOnClickListener(this)
         bindding.buttonSnack.setOnClickListener(this)
+        laodSpinner()
     }
+
+    private fun laodSpinner() {
+        val list = listOf("Grams", "Kg", "Pounds", "Ounces")
+
+        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, list)
+        bindding.spinnerDynamic.adapter = adapter
+
+    }
+
     override fun onClick(v: View) {
         when (v.id) {
             bindding.buttonToast.id -> {

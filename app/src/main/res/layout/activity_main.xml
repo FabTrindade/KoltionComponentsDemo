@@ -26,5 +26,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:entries="@array/weight_entry"/>
+    <Spinner
+        android:id="@+id/spinner_dynamic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:entries="@array/weight_entry"/>
+
 
 </LinearLayout>
