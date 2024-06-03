@@ -35,6 +35,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, AdapterView.OnIt
 
         bindding.switchOnOff.setOnCheckedChangeListener(this)
         bindding.switchOnOff.isChecked = true
+
+        bindding.checkbox.setOnCheckedChangeListener(this)
+        bindding.checkbox.isChecked = true
     }
 
     private fun loadSpinner() {
@@ -106,7 +109,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, AdapterView.OnIt
         Toast.makeText(this, "Nothing selected!", Toast.LENGTH_SHORT).show()
     }
 
-    override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+    override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
         // fromUser is true when the change is made by touching the element
         // If the assignment is made by code, fromUser is false
         bindding.textSeekBar.text = "$progress - $fromUser"
@@ -115,18 +118,25 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, AdapterView.OnIt
     /**
      * Seekbar - When the component starts to be dragged
      **/
-    override fun onStartTrackingTouch(seekBar: SeekBar?) {
+    override fun onStartTrackingTouch(seekBar: SeekBar) {
         Toast.makeText(this, "Seekbar started!", Toast.LENGTH_SHORT).show()
     }
 
     /**
      * Seekbar - Handles end touch event on the Seekbar
      **/
-    override fun onStopTrackingTouch(seekBar: SeekBar?) {
+    override fun onStopTrackingTouch(seekBar: SeekBar) {
         Toast.makeText(this, "Seekbar stopped!", Toast.LENGTH_SHORT).show()
     }
 
-    override fun onCheckedChanged(buttonView: CompoundButton?, isChecked: Boolean) {
-        Toast.makeText(this, "Switch is ${if (isChecked) "on" else "off"}!", Toast.LENGTH_SHORT).show()
+    override fun onCheckedChanged(buttonView: CompoundButton, isChecked: Boolean) {
+        when (buttonView.id) {
+            R.id.switch_on_off -> {
+                Toast.makeText(this, "Switch is ${if (isChecked) "on" else "off"}!", Toast.LENGTH_SHORT).show()
+            }
+            R.id.checkbox -> {
+                Toast.makeText(this, "Checkbox is ${if (isChecked) "on" else "off"}!", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 }
