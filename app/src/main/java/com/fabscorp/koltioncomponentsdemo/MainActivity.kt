@@ -38,6 +38,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, AdapterView.OnIt
 
         bindding.checkbox.setOnCheckedChangeListener(this)
         bindding.checkbox.isChecked = true
+
+        bindding.radioYes.setOnCheckedChangeListener(this)
     }
 
     private fun loadSpinner() {
@@ -136,6 +138,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, AdapterView.OnIt
             }
             R.id.checkbox -> {
                 Toast.makeText(this, "Checkbox is ${if (isChecked) "on" else "off"}!", Toast.LENGTH_SHORT).show()
+            }
+
+            R.id.radio_yes -> {
+                Toast.makeText(this, "Radio Yes is ${if (isChecked) "on" else "off"}!", Toast.LENGTH_SHORT).show()
             }
         }
     }
