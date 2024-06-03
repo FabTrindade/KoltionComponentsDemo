@@ -6,11 +6,13 @@ import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.SeekBar
 import android.widget.Toast
 import com.fabscorp.koltioncomponentsdemo.databinding.ActivityMainBinding
 import com.google.android.material.snackbar.Snackbar
 
-class MainActivity : AppCompatActivity(), View.OnClickListener, AdapterView.OnItemSelectedListener{
+class MainActivity : AppCompatActivity(), View.OnClickListener, AdapterView.OnItemSelectedListener,
+    SeekBar.OnSeekBarChangeListener {
     private lateinit var bindding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,6 +28,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, AdapterView.OnIt
         bindding.buttonSetSpinner.setOnClickListener(this)
 
         bindding.spinnerDynamic.onItemSelectedListener = this
+
+        bindding.seekBar.setOnSeekBarChangeListener(this)
+        bindding.seekBar.progress = 15 // Initial seekbar progress
 
         //loadSpinner()
     }
@@ -75,6 +80,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, AdapterView.OnIt
                 loadSpinner()
 
             }
+
             bindding.buttonSetSpinner.id -> {
                 //To set spinner finfo.
                 //bindding.spinnerDynamic.setSelection(2)
@@ -93,7 +99,28 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, AdapterView.OnIt
         Toast.makeText(this, "$position - $id", Toast.LENGTH_SHORT).show()
 
     }
+
     override fun onNothingSelected(parent: AdapterView<*>) {
         Toast.makeText(this, "Nothing selected!", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+        // fromUser is true when the change is made by touching the element
+        // If the assignment is made by code, fromUser is false
+        bindding.textSeekBar.text = "$progress - $fromUser"
+    }
+
+    /**
+     * Seekbar - When the component starts to be dragged
+     **/
+    override fun onStartTrackingTouch(seekBar: SeekBar?) {
+        Toast.makeText(this, "Seekbar started!", Toast.LENGTH_SHORT).show()
+    }
+
+    /**
+     * Seekbar - Handles end touch event on the Seekbar
+     **/
+    override fun onStopTrackingTouch(seekBar: SeekBar?) {
+        Toast.makeText(this, "Seekbar stopped!", Toast.LENGTH_SHORT).show()
     }
 }
