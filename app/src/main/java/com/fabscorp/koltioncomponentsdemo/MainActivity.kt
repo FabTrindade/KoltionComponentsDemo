@@ -4,12 +4,13 @@ import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import com.fabscorp.koltioncomponentsdemo.databinding.ActivityMainBinding
 import com.google.android.material.snackbar.Snackbar
 
-class MainActivity : AppCompatActivity(), View.OnClickListener {
+class MainActivity : AppCompatActivity(), View.OnClickListener, AdapterView.OnItemSelectedListener{
     private lateinit var bindding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,10 +25,12 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         bindding.buttonGetSpinner.setOnClickListener(this)
         bindding.buttonSetSpinner.setOnClickListener(this)
 
-        laodSpinner()
+        bindding.spinnerDynamic.onItemSelectedListener = this
+
+        //loadSpinner()
     }
 
-    private fun laodSpinner() {
+    private fun loadSpinner() {
         val list = listOf("Grams", "Kg", "Pounds", "Ounces")
 
         val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, list)
@@ -40,6 +43,13 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             bindding.buttonToast.id -> {
                 val toast = Toast.makeText(this, "Toast me!", Toast.LENGTH_SHORT)
                 toast.show()
+
+                // It is possible to manipulate the toast view, but it is deprecated
+                // As an alternative, if customization is needed, snack bar is recommended.
+                // Example: toast.view
+
+                // Positioning - Works only up to API 29
+                // Example: toast.setGravity(Gravity.TOP, 15, 50)
             }
 
             bindding.buttonSnack.id -> {
@@ -62,12 +72,28 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 val id1 = bindding.spinnerDynamic.selectedItemId
                 val id2 = bindding.spinnerDynamic.selectedItemPosition
 
+                loadSpinner()
+
             }
             bindding.buttonSetSpinner.id -> {
                 //To set spinner finfo.
-                bindding.spinnerDynamic.setSelection(2)
+                //bindding.spinnerDynamic.setSelection(2)
+                bindding.spinnerDynamic.adapter = null
             }
 
         }
+    }
+
+    override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+        // parent: AdapterView - Adapter where the selection occurred
+        // view: View - Layout of the clicked element
+        // position: Int - Position of the selected item in the list
+        // id: Long - Position of the selected row
+
+        Toast.makeText(this, "$position - $id", Toast.LENGTH_SHORT).show()
+
+    }
+    override fun onNothingSelected(parent: AdapterView<*>) {
+        Toast.makeText(this, "Nothing selected!", Toast.LENGTH_SHORT).show()
     }
 }
