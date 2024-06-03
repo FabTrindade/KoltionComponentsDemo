@@ -6,13 +6,14 @@ import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.CompoundButton
 import android.widget.SeekBar
 import android.widget.Toast
 import com.fabscorp.koltioncomponentsdemo.databinding.ActivityMainBinding
 import com.google.android.material.snackbar.Snackbar
 
 class MainActivity : AppCompatActivity(), View.OnClickListener, AdapterView.OnItemSelectedListener,
-    SeekBar.OnSeekBarChangeListener {
+    SeekBar.OnSeekBarChangeListener, CompoundButton.OnCheckedChangeListener {
     private lateinit var bindding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,7 +33,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, AdapterView.OnIt
         bindding.seekBar.setOnSeekBarChangeListener(this)
         bindding.seekBar.progress = 15 // Initial seekbar progress
 
-        //loadSpinner()
+        bindding.switchOnOff.setOnCheckedChangeListener(this)
+        bindding.switchOnOff.isChecked = true
     }
 
     private fun loadSpinner() {
@@ -122,5 +124,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, AdapterView.OnIt
      **/
     override fun onStopTrackingTouch(seekBar: SeekBar?) {
         Toast.makeText(this, "Seekbar stopped!", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onCheckedChanged(buttonView: CompoundButton?, isChecked: Boolean) {
+        Toast.makeText(this, "Switch is ${if (isChecked) "on" else "off"}!", Toast.LENGTH_SHORT).show()
     }
 }
