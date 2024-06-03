@@ -1,4 +1,4 @@
-## KoltionComponentsDemo
+## KotlinComponentsDemo
 ### A simple Android/Kotlin application to dememonstrate some of its components.  
 
 ### Highlight features used:  
