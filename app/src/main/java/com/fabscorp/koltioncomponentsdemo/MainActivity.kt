@@ -21,6 +21,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
         bindding.buttonToast.setOnClickListener(this)
         bindding.buttonSnack.setOnClickListener(this)
+        bindding.buttonGetSpinner.setOnClickListener(this)
+        bindding.buttonSetSpinner.setOnClickListener(this)
+
         laodSpinner()
     }
 
@@ -51,6 +54,18 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 })
                 snack.setBackgroundTint(Color.GRAY)
                 snack.show()
+            }
+
+            bindding.buttonGetSpinner.id -> {
+                // To get spinner infos.
+                val str = bindding.spinnerDynamic.selectedItem
+                val id1 = bindding.spinnerDynamic.selectedItemId
+                val id2 = bindding.spinnerDynamic.selectedItemPosition
+
+            }
+            bindding.buttonSetSpinner.id -> {
+                //To set spinner finfo.
+                bindding.spinnerDynamic.setSelection(2)
             }
 
         }
