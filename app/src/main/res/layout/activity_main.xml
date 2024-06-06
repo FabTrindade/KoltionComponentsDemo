@@ -98,8 +98,54 @@
             android:text="No"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
-
     </RadioGroup>
+
+    <ProgressBar
+        android:id="@+id/progressbar"
+        style="@android:style/Widget.Material.ProgressBar.Horizontal"
+        android:max="50"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/button_decProgress"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_margin="@dimen/cardview_compat_inset_shadow"
+            android:text="-"/>
+
+        <Button
+            android:id="@+id/button_incProgress"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/cardview_compat_inset_shadow"
+            android:layout_weight="1"
+            android:text="+"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/button_toogleProgress"
+            android:layout_width="wrap_content"
+            android:text="Toogle Progress"
+            android:layout_height="wrap_content"/>
+        <ProgressBar
+            android:id="@+id/progress_circular"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"/>
+    </LinearLayout>
+
 
 
 </LinearLayout>

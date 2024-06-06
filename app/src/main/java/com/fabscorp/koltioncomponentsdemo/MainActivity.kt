@@ -27,6 +27,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, AdapterView.OnIt
         bindding.buttonSnack.setOnClickListener(this)
         bindding.buttonGetSpinner.setOnClickListener(this)
         bindding.buttonSetSpinner.setOnClickListener(this)
+        bindding.buttonIncProgress.setOnClickListener(this)
+        bindding.buttonDecProgress.setOnClickListener(this)
+        bindding.buttonToogleProgress.setOnClickListener(this)
 
         bindding.spinnerDynamic.onItemSelectedListener = this
 
@@ -94,6 +97,21 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, AdapterView.OnIt
                 bindding.spinnerDynamic.adapter = null
             }
 
+            bindding.buttonDecProgress.id -> {
+                bindding.progressbar.incrementProgressBy(-5)
+            }
+
+            bindding.buttonIncProgress.id -> {
+                bindding.progressbar.incrementProgressBy(5)
+            }
+
+            bindding.buttonToogleProgress.id -> {
+                if (bindding.progressCircular.visibility == View.GONE) {
+                    bindding.progressCircular.visibility = View.VISIBLE
+                } else {
+                    bindding.progressCircular.visibility = View.GONE
+                }
+            }
         }
     }
 
