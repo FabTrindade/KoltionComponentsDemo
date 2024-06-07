@@ -1,5 +1,6 @@
 package com.fabscorp.koltioncomponentsdemo
 
+import android.app.TimePickerDialog
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -8,12 +9,14 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.CompoundButton
 import android.widget.SeekBar
+import android.widget.TimePicker
 import android.widget.Toast
 import com.fabscorp.koltioncomponentsdemo.databinding.ActivityMainBinding
 import com.google.android.material.snackbar.Snackbar
 
 class MainActivity : AppCompatActivity(), View.OnClickListener, AdapterView.OnItemSelectedListener,
-    SeekBar.OnSeekBarChangeListener, CompoundButton.OnCheckedChangeListener {
+    SeekBar.OnSeekBarChangeListener, CompoundButton.OnCheckedChangeListener,
+    TimePickerDialog.OnTimeSetListener{
     private lateinit var bindding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,6 +33,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, AdapterView.OnIt
         bindding.buttonIncProgress.setOnClickListener(this)
         bindding.buttonDecProgress.setOnClickListener(this)
         bindding.buttonToogleProgress.setOnClickListener(this)
+        bindding.buttonTimepicker.setOnClickListener(this)
 
         bindding.spinnerDynamic.onItemSelectedListener = this
 
@@ -112,6 +116,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, AdapterView.OnIt
                     bindding.progressCircular.visibility = View.GONE
                 }
             }
+            
+            bindding.buttonTimepicker.id -> {
+                TimePickerDialog(this, this, 20, 15, true).show()
+            }
         }
     }
 
@@ -162,5 +170,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, AdapterView.OnIt
                 Toast.makeText(this, "Radio Yes is ${if (isChecked) "on" else "off"}!", Toast.LENGTH_SHORT).show()
             }
         }
+    }
+
+    override fun onTimeSet(view: TimePicker, hourOfDay: Int, minute: Int) {
+        bindding.textViewTimepicker.text = "$hourOfDay : $minute"
     }
 }
