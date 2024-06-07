@@ -167,4 +167,25 @@
             android:textSize="28dp"/>
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/button_datepicker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Datepicker Dialog"/>
+
+        <TextView
+            android:id="@+id/textView_datepicker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Datepicker"
+            android:layout_marginTop="6dp"
+            android:layout_marginStart="6dp"
+            android:textSize="28dp"/>
+    </LinearLayout>
+
 </LinearLayout>

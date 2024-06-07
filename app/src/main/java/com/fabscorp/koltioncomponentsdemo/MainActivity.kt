@@ -1,5 +1,6 @@
 package com.fabscorp.koltioncomponentsdemo
 
+import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
@@ -8,15 +9,17 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.CompoundButton
+import android.widget.DatePicker
 import android.widget.SeekBar
 import android.widget.TimePicker
 import android.widget.Toast
 import com.fabscorp.koltioncomponentsdemo.databinding.ActivityMainBinding
 import com.google.android.material.snackbar.Snackbar
+import java.util.Calendar
 
 class MainActivity : AppCompatActivity(), View.OnClickListener, AdapterView.OnItemSelectedListener,
     SeekBar.OnSeekBarChangeListener, CompoundButton.OnCheckedChangeListener,
-    TimePickerDialog.OnTimeSetListener{
+    TimePickerDialog.OnTimeSetListener, DatePickerDialog.OnDateSetListener{
     private lateinit var bindding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,6 +37,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, AdapterView.OnIt
         bindding.buttonDecProgress.setOnClickListener(this)
         bindding.buttonToogleProgress.setOnClickListener(this)
         bindding.buttonTimepicker.setOnClickListener(this)
+        bindding.buttonDatepicker.setOnClickListener(this)
 
         bindding.spinnerDynamic.onItemSelectedListener = this
 
@@ -120,6 +124,13 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, AdapterView.OnIt
             bindding.buttonTimepicker.id -> {
                 TimePickerDialog(this, this, 20, 15, true).show()
             }
+            bindding.buttonDatepicker.id -> {
+                val calendar = Calendar.getInstance()
+                val year = calendar.get(Calendar.YEAR)
+                val month = calendar.get(Calendar.MONTH)
+                val dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH)
+                DatePickerDialog(this, this, year, month, dayOfMonth).show()
+            }
         }
     }
 
@@ -173,6 +184,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, AdapterView.OnIt
     }
 
     override fun onTimeSet(view: TimePicker, hourOfDay: Int, minute: Int) {
-        bindding.textViewTimepicker.text = "$hourOfDay : $minute"
+        bindding.textViewTimepicker.text = "$hourOfDay:$minute"
+    }
+
+    override fun onDateSet(view: DatePicker, year: Int, month: Int, dayOfMonth: Int) {
+        bindding.textViewDatepicker.text = "$dayOfMonth/${month+1}/$year"
     }
 }
